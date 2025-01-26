@@ -285,7 +285,7 @@ if option == "Invoice Generator":
         generate = st.form_submit_button("Generate Invoice")
 
         if reset:
-            st.experimental_rerun()  # Reset the form by reloading the app
+            st.rerun()  # Reset the form by reloading the app
 
         if generate:
             generate_clicked = True  # Mark that the generate button was clicked
@@ -322,7 +322,7 @@ elif option == "Receipt Generator":
         generate1 = st.form_submit_button("Generate Receipt")
 
         if reset1:
-            st.experimental_rerun()  # Reset the form by reloading the app
+            st.rerun()  # Reset the form by reloading the app
 
         if generate1:
             generate_clicked = True  # Mark that the generate button was clicked
