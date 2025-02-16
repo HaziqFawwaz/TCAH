@@ -145,7 +145,7 @@ def generate_invoice(name, payment_due_date, package_basic_qty, package_advance_
     pdf.output("invoice.pdf")
 
 # Function to generate the receipt PDF
-def generate_receipt(name, package_basic_qty, package_advance_qty, package_full_day_qty, transit_basic_qty, transit_plus_qty, reg_qty, annual_qty):
+def generate_receipt(name, package_basic_qty, package_advance_qty, package_full_day_qty, transit_basic_qty, transit_plus_qty, daily_transit_qty, ext30M_qty, ext1H_qty, reg_qty, annual_qty):
     pdf = FPDF()
     pdf.add_page()
 
@@ -167,7 +167,7 @@ def generate_receipt(name, package_basic_qty, package_advance_qty, package_full_
     pdf.cell(100, 7, "To:", ln=False, align="L")  # "To" in bold
     pdf.cell(59, 7, "Receipt Date: ", ln=False, align="R")
     pdf.set_font("Arial", size=12)  # Bold font for "Bill To"
-    pdf.cell(31, 7, f"{date.today().strftime('%d %B %Y')}", ln=True, align="R")
+    pdf.cell(32, 7, f"{date.today().strftime('%d %B %Y')}", ln=True, align="R")
     pdf.set_font("Arial", size=12)  # Switch to regular font for the name
     pdf.cell(100, 7, f"{name}", ln=False, align="L")  # Name on the next line
     pdf.set_font("Arial", "B", size=12)
@@ -200,6 +200,9 @@ def generate_receipt(name, package_basic_qty, package_advance_qty, package_full_
     package_full_day_price = 460  # Price for Package Full Day
     transit_basic_price = 280  # Price for Transit Basic
     transit_plus_price = 330 # Price for Transit Plus
+    daily_transit_price = 35 #Price for daily transit
+    ext30M_price = 13 #Price for extra time 30 mins
+    ext1H_price = 25 #Price for extra time 1 hour
     reg_fee = 100
     annual_fee = 200
 
@@ -208,8 +211,11 @@ def generate_receipt(name, package_basic_qty, package_advance_qty, package_full_
         ("Package Basic (7 am to 12.30 pm)", package_basic_qty, package_basic_price, package_basic_qty * package_basic_price),
         ("Package Advance (7 am to 3 pm)", package_advance_qty, package_advance_price, package_advance_qty * package_advance_price),
         ("Package Full Day (7 am to 5.30 pm)", package_full_day_qty, package_full_day_price, package_full_day_qty * package_full_day_price),
-         ("Package Transit Basic", transit_basic_qty, transit_basic_price, transit_basic_qty * transit_basic_price),
+        ("Package Transit Basic", transit_basic_qty, transit_basic_price, transit_basic_qty * transit_basic_price),
         ("Package Transit Plus (Reading + Writing)", transit_plus_qty, transit_plus_price, transit_plus_qty * transit_plus_price),
+        ("Package Transit Daily (per day)", daily_transit_qty, daily_transit_price, daily_transit_qty * daily_transit_price),
+        ("Extra Time (30 Minutes)", ext30M_qty, ext30M_price, ext30M_qty * ext30M_price),
+        ("Extra Time (1 Hours)", ext1H_qty, ext1H_price, ext1H_qty * ext1H_price),
         ("Registration Fee", reg_qty, reg_fee, reg_qty * reg_fee),
         ("Annual Fee", annual_qty, annual_fee, annual_qty * annual_fee),
     ]
@@ -323,6 +329,9 @@ elif option == "Receipt Generator":
         package_full_day_qty = st.number_input("Package Full Day (RM 460 each)", min_value=0, step=1, value=0)
         transit_basic_qty = st.number_input("Transit Basic (RM 280 each)", min_value=0, step=1, value=0)
         transit_plus_qty = st.number_input("Transit Plus (RM 330 each)", min_value=0, step=1, value=0)
+        daily_transit_qty = st.number_input("Daily Transit (RM 35 each)", min_value=0, step=1, value=0)
+        ext30M_qty = st.number_input("Extra Time 30 Minutes (RM 13 each)", min_value=0, step=1, value=0)
+        ext1H_qty = st.number_input("Extra Time 1 Hour (RM 25 each)", min_value=0, step=1, value=0)
         reg_fee = st.number_input("Registration Fee (RM 100)", min_value=0, step=1, value=0)
         annual_fee = st.number_input("Annual Fee (RM 200)", min_value=0, step=1, value=0)
 
@@ -340,7 +349,7 @@ elif option == "Receipt Generator":
         if name.strip() == "":
             st.error("Please enter a name before generating the receipt.")
         else:
-            generate_receipt(name, package_basic_qty, package_advance_qty, package_full_day_qty, transit_basic_qty, transit_plus_qty, reg_fee, annual_fee)
+            generate_receipt(name, package_basic_qty, package_advance_qty, package_full_day_qty, transit_basic_qty, transit_plus_qty, daily_transit_qty, ext30M_qty, ext1H_qty, reg_fee, annual_fee)
             with open("receipt.pdf", "rb") as file:
                 st.download_button("Download Receipt", file, file_name="receipt.pdf")
 
