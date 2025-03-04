@@ -67,9 +67,9 @@ def generate_invoice(name, payment_due_date, package_basic_qty, package_advance_
 
     # Add items to the table
     items = [
-        ("Package Basic (7 am to 12.30 pm)", package_basic_qty, package_basic_price, package_basic_qty * package_basic_price),
-        ("Package Advance (7 am to 3 pm)", package_advance_qty, package_advance_price, package_advance_qty * package_advance_price),
-        ("Package Full Day (7 am to 5.30 pm)", package_full_day_qty, package_full_day_price, package_full_day_qty * package_full_day_price),
+        ("Package Basic (8.30 am to 12.30 pm)", package_basic_qty, package_basic_price, package_basic_qty * package_basic_price),
+        ("Package Advance (8.30 am to 3 pm)", package_advance_qty, package_advance_price, package_advance_qty * package_advance_price),
+        ("Package Full Day (8.30 am to 5.30 pm)", package_full_day_qty, package_full_day_price, package_full_day_qty * package_full_day_price),
         ("Package Transit Basic", transit_basic_qty, transit_basic_price, transit_basic_qty * transit_basic_price),
         ("Package Transit Plus (Reading + Writing)", transit_plus_qty, transit_plus_price, transit_plus_qty * transit_plus_price),
         ("Package Transit Daily (per day)", daily_transit_qty, daily_transit_price, daily_transit_qty * daily_transit_price),
@@ -208,9 +208,9 @@ def generate_receipt(name, package_basic_qty, package_advance_qty, package_full_
 
     # Add items to the table
     items = [
-        ("Package Basic (7 am to 12.30 pm)", package_basic_qty, package_basic_price, package_basic_qty * package_basic_price),
-        ("Package Advance (7 am to 3 pm)", package_advance_qty, package_advance_price, package_advance_qty * package_advance_price),
-        ("Package Full Day (7 am to 5.30 pm)", package_full_day_qty, package_full_day_price, package_full_day_qty * package_full_day_price),
+        ("Package Basic (8.30 am to 12.30 pm)", package_basic_qty, package_basic_price, package_basic_qty * package_basic_price),
+        ("Package Advance (8.30 am to 3 pm)", package_advance_qty, package_advance_price, package_advance_qty * package_advance_price),
+        ("Package Full Day (8.30 am to 5.30 pm)", package_full_day_qty, package_full_day_price, package_full_day_qty * package_full_day_price),
         ("Package Transit Basic", transit_basic_qty, transit_basic_price, transit_basic_qty * transit_basic_price),
         ("Package Transit Plus (Reading + Writing)", transit_plus_qty, transit_plus_price, transit_plus_qty * transit_plus_price),
         ("Package Transit Daily (per day)", daily_transit_qty, daily_transit_price, daily_transit_qty * daily_transit_price),
