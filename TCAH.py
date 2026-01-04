@@ -65,7 +65,7 @@ def generate_invoice(name, payment_due_date, package_basic_qty, package_advance_
     sleepover_price = 30 #Price for sleep over
     earlymorning_price = 30 #Price for early morning
     reg_fee = 100 #Price for registration fee
-    annual_fee = 200 #Price for annual fee
+    annual_fee = 300 #Price for annual fee
 
     # Add items to the table
     items = [
@@ -210,7 +210,7 @@ def generate_receipt(name, package_basic_qty, package_advance_qty, package_full_
     sleepover_price = 30 #Price for sleep over
     earlymorning_price = 30 #Price for early morning
     reg_fee = 100
-    annual_fee = 200
+    annual_fee = 300
 
     # Add items to the table
     items = [
@@ -303,7 +303,7 @@ if option == "Invoice Generator":
         sleepover_qty = st.number_input("Sleep Over (RM 30 each)", min_value=0, step=1, value=0)
         earlymorning_qty = st.number_input("Early Morning (RM 30 each)", min_value=0, step=1, value=0)
         reg_fee = st.number_input("Registration Fee (RM 100)", min_value=0, step=1, value=0)
-        annual_fee = st.number_input("Annual Fee (RM 200)", min_value=0, step=1, value=0)
+        annual_fee = st.number_input("Annual Fee (RM 300)", min_value=0, step=1, value=0)
 
         # Buttons
         reset = st.form_submit_button("Reset Form")
@@ -345,7 +345,7 @@ elif option == "Receipt Generator":
         sleepover_qty = st.number_input("Sleep Over (RM 30 each)", min_value=0, step=1, value=0)
         earlymorning_qty = st.number_input("Early Morning (RM 30 each)", min_value=0, step=1, value=0)
         reg_fee = st.number_input("Registration Fee (RM 100)", min_value=0, step=1, value=0)
-        annual_fee = st.number_input("Annual Fee (RM 200)", min_value=0, step=1, value=0)
+        annual_fee = st.number_input("Annual Fee (RM 300)", min_value=0, step=1, value=0)
 
         # Buttons
         reset1 = st.form_submit_button("Reset Form")
@@ -367,5 +367,6 @@ elif option == "Receipt Generator":
 
 
    
+
 
 
