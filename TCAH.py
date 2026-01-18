@@ -4,7 +4,7 @@ from datetime import date
 import random
 
 # Function to generate the invoice PDF
-def generate_invoice(name, payment_due_date, package_basic_qty, package_advance_qty, package_full_day_qty, transit_basic_qty, transit_plus_qty, daily_transit_qty, ext30M_qty, ext1H_qty, sleepover_qty, earlymorning_qty, reg_qty, annual_qty):
+def generate_invoice(name, payment_due_date, package_basic_qty, package_advance_qty, package_full_day_qty, transit_basic_qty, transit_plus_qty, daily_transit_qty, ext30M_qty, ext1H_qty, sleepover_qty, earlymorning_qty, uniform_qty, reg_qty, annual_qty):
     pdf = FPDF()
     pdf.add_page()
 
@@ -64,6 +64,7 @@ def generate_invoice(name, payment_due_date, package_basic_qty, package_advance_
     ext1H_price = 25 #Price for extra time 1 hour
     sleepover_price = 30 #Price for sleep over
     earlymorning_price = 30 #Price for early morning
+    uniform_price = 60 #Price for uniform tadika
     reg_fee = 100 #Price for registration fee
     annual_fee = 300 #Price for annual fee
 
@@ -79,6 +80,7 @@ def generate_invoice(name, payment_due_date, package_basic_qty, package_advance_
         ("Extra Time (1 Hours)", ext1H_qty, ext1H_price, ext1H_qty * ext1H_price),
         ("Sleep Over", sleepover_qty, sleepover_price, sleepover_qty * sleepover_price),
         ("Early Morning", earlymorning_qty, earlymorning_price, earlymorning_qty * earlymorning_price),
+        ("Uniform Tadika", uniform_qty, uniform_price, uniform_qty * uniform_price),
         ("Registration Fee", reg_qty, reg_fee, reg_qty * reg_fee),
         ("Annual Fee", annual_qty, annual_fee, annual_qty * annual_fee),
     ]
@@ -149,7 +151,7 @@ def generate_invoice(name, payment_due_date, package_basic_qty, package_advance_
     pdf.output("invoice.pdf")
 
 # Function to generate the receipt PDF
-def generate_receipt(name, package_basic_qty, package_advance_qty, package_full_day_qty, transit_basic_qty, transit_plus_qty, daily_transit_qty, ext30M_qty, ext1H_qty, sleepover_qty, earlymorning_qty, reg_qty, annual_qty):
+def generate_receipt(name, package_basic_qty, package_advance_qty, package_full_day_qty, transit_basic_qty, transit_plus_qty, daily_transit_qty, ext30M_qty, ext1H_qty, sleepover_qty, earlymorning_qty, uniform_qty, reg_qty, annual_qty):
     pdf = FPDF()
     pdf.add_page()
 
@@ -209,6 +211,7 @@ def generate_receipt(name, package_basic_qty, package_advance_qty, package_full_
     ext1H_price = 25 #Price for extra time 1 hour
     sleepover_price = 30 #Price for sleep over
     earlymorning_price = 30 #Price for early morning
+    uniform_price = 60 #Price for uniform tadika
     reg_fee = 100
     annual_fee = 300
 
@@ -224,6 +227,7 @@ def generate_receipt(name, package_basic_qty, package_advance_qty, package_full_
         ("Extra Time (1 Hours)", ext1H_qty, ext1H_price, ext1H_qty * ext1H_price),
         ("Sleep Over", sleepover_qty, sleepover_price, sleepover_qty * sleepover_price),
         ("Early Morning", earlymorning_qty, earlymorning_price, earlymorning_qty * earlymorning_price),
+        ("Uniform Tadika", uniform_qty, uniform_price, uniform_qty * uniform_price),
         ("Registration Fee", reg_qty, reg_fee, reg_qty * reg_fee),
         ("Annual Fee", annual_qty, annual_fee, annual_qty * annual_fee),
     ]
@@ -302,6 +306,7 @@ if option == "Invoice Generator":
         ext1H_qty = st.number_input("Extra Time 1 Hour (RM 25 each)", min_value=0, step=1, value=0)
         sleepover_qty = st.number_input("Sleep Over (RM 30 each)", min_value=0, step=1, value=0)
         earlymorning_qty = st.number_input("Early Morning (RM 30 each)", min_value=0, step=1, value=0)
+        uniform_qty = st.number_input("Uniform Tadika (RM 60 each)", min_value=0, step=1, value=0)
         reg_fee = st.number_input("Registration Fee (RM 100)", min_value=0, step=1, value=0)
         annual_fee = st.number_input("Annual Fee (RM 300)", min_value=0, step=1, value=0)
 
@@ -319,7 +324,7 @@ if option == "Invoice Generator":
         if name.strip() == "":
             st.error("Please enter a name before generating the invoice.")
         else:
-            generate_invoice(name, payment_due_date.strftime("%d/%m/%Y"), package_basic_qty, package_advance_qty, package_full_day_qty, transit_basic_qty, transit_plus_qty, daily_transit_qty, ext30M_qty, ext1H_qty, sleepover_qty, earlymorning_qty, reg_fee, annual_fee)
+            generate_invoice(name, payment_due_date.strftime("%d/%m/%Y"), package_basic_qty, package_advance_qty, package_full_day_qty, transit_basic_qty, transit_plus_qty, daily_transit_qty, ext30M_qty, ext1H_qty, sleepover_qty, earlymorning_qty, uniform_qty, reg_fee, annual_fee)
             with open("invoice.pdf", "rb") as file:
                 st.download_button("Download Invoice", file, file_name="invoice.pdf")
 
@@ -344,6 +349,7 @@ elif option == "Receipt Generator":
         ext1H_qty = st.number_input("Extra Time 1 Hour (RM 25 each)", min_value=0, step=1, value=0)
         sleepover_qty = st.number_input("Sleep Over (RM 30 each)", min_value=0, step=1, value=0)
         earlymorning_qty = st.number_input("Early Morning (RM 30 each)", min_value=0, step=1, value=0)
+        uniform_qty = st.number_input("Uniform Tadika (RM 60 each)", min_value=0, step=1, value=0)
         reg_fee = st.number_input("Registration Fee (RM 100)", min_value=0, step=1, value=0)
         annual_fee = st.number_input("Annual Fee (RM 300)", min_value=0, step=1, value=0)
 
@@ -361,12 +367,13 @@ elif option == "Receipt Generator":
         if name.strip() == "":
             st.error("Please enter a name before generating the receipt.")
         else:
-            generate_receipt(name, package_basic_qty, package_advance_qty, package_full_day_qty, transit_basic_qty, transit_plus_qty, daily_transit_qty, ext30M_qty, ext1H_qty, sleepover_qty, earlymorning_qty, reg_fee, annual_fee)
+            generate_receipt(name, package_basic_qty, package_advance_qty, package_full_day_qty, transit_basic_qty, transit_plus_qty, daily_transit_qty, ext30M_qty, ext1H_qty, sleepover_qty, earlymorning_qty, uniform_qty, reg_fee, annual_fee)
             with open("receipt.pdf", "rb") as file:
                 st.download_button("Download Receipt", file, file_name="receipt.pdf")
 
 
    
+
 
 
 
