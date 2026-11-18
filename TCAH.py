@@ -4,7 +4,7 @@ from datetime import date
 import random
 
 # Function to generate the invoice PDF
-def generate_invoice(name, payment_due_date, package_basic_qty, package_advance_qty, package_full_day_qty, transit_basic_qty, transit_plus_qty, daily_transit_qty, ext30M_qty, ext1H_qty, extraclass_qty, earlymorning_qty, uniform_qty, sport_qty, reg_qty, annual_qty):
+def generate_invoice(name, payment_due_date, package_basic_qty, package_advance_qty, package_full_day_qty, transit_basic_qty, transit_plus_qty, daily_transit_qty, ext30M_qty, ext1H_qty, extraclass_qty, earlymorning_qty, uniform_qty, sport_qty, grad_qty, reg_qty, annual_qty):
     pdf = FPDF()
     pdf.add_page()
 
@@ -66,6 +66,7 @@ def generate_invoice(name, payment_due_date, package_basic_qty, package_advance_
     earlymorning_price = 30 #Price for early morning
     uniform_price = 60 #Price for uniform tadika
     sport_price = 40 #Price for sport shirt
+    grad_price = 50 #Price for graduation
     reg_fee = 100 #Price for registration fee
     annual_fee = 300 #Price for annual fee
 
@@ -83,6 +84,7 @@ def generate_invoice(name, payment_due_date, package_basic_qty, package_advance_
         ("Early Morning", earlymorning_qty, earlymorning_price, earlymorning_qty * earlymorning_price),
         ("Uniform Tadika", uniform_qty, uniform_price, uniform_qty * uniform_price),
         ("Baju Sukan", sport_qty, sport_price, sport_qty * sport_price),
+        ("Graduation", grad_qty, grad_price, grad_qty * grad_price),
         ("Registration Fee", reg_qty, reg_fee, reg_qty * reg_fee),
         ("Annual Fee", annual_qty, annual_fee, annual_qty * annual_fee),
     ]
@@ -153,7 +155,7 @@ def generate_invoice(name, payment_due_date, package_basic_qty, package_advance_
     pdf.output("invoice.pdf")
 
 # Function to generate the receipt PDF
-def generate_receipt(name, package_basic_qty, package_advance_qty, package_full_day_qty, transit_basic_qty, transit_plus_qty, daily_transit_qty, ext30M_qty, ext1H_qty, extraclass_qty, earlymorning_qty, uniform_qty, sport_qty, reg_qty, annual_qty):
+def generate_receipt(name, package_basic_qty, package_advance_qty, package_full_day_qty, transit_basic_qty, transit_plus_qty, daily_transit_qty, ext30M_qty, ext1H_qty, extraclass_qty, earlymorning_qty, uniform_qty, sport_qty, grad_qty, reg_qty, annual_qty):
     pdf = FPDF()
     pdf.add_page()
 
@@ -215,6 +217,7 @@ def generate_receipt(name, package_basic_qty, package_advance_qty, package_full_
     earlymorning_price = 30 #Price for early morning
     uniform_price = 60 #Price for uniform tadika
     sport_price = 40 #Price for sport shirt
+    grad_price = 50 #Price for graduation
     reg_fee = 100
     annual_fee = 300
 
@@ -232,6 +235,7 @@ def generate_receipt(name, package_basic_qty, package_advance_qty, package_full_
         ("Early Morning", earlymorning_qty, earlymorning_price, earlymorning_qty * earlymorning_price),
         ("Uniform Tadika", uniform_qty, uniform_price, uniform_qty * uniform_price),
         ("Baju Sukan", sport_qty, sport_price, sport_qty * sport_price),
+        ("Graduation", grad_qty, grad_price, grad_qty * grad_price),
         ("Registration Fee", reg_qty, reg_fee, reg_qty * reg_fee),
         ("Annual Fee", annual_qty, annual_fee, annual_qty * annual_fee),
     ]
@@ -312,6 +316,7 @@ if option == "Invoice Generator":
         earlymorning_qty = st.number_input("Early Morning (RM 30 each)", min_value=0, step=1, value=0)
         uniform_qty = st.number_input("Uniform Tadika (RM 60 each)", min_value=0, step=1, value=0)
         sport_qty = st.number_input("Baju Sukan (RM 40 each)", min_value=0, step=1, value=0)
+        grad_qty = st.number_input("Graduation (RM 50 each)", min_value=0, step=1, value=0)
         reg_fee = st.number_input("Registration Fee (RM 100)", min_value=0, step=1, value=0)
         annual_fee = st.number_input("Annual Fee (RM 300)", min_value=0, step=1, value=0)
 
@@ -356,6 +361,7 @@ elif option == "Receipt Generator":
         earlymorning_qty = st.number_input("Early Morning (RM 30 each)", min_value=0, step=1, value=0)
         uniform_qty = st.number_input("Uniform Tadika (RM 60 each)", min_value=0, step=1, value=0)
         sport_qty = st.number_input("Baju Sukan (RM 40 each)", min_value=0, step=1, value=0)
+        grad_qty = st.number_input("Graduation (RM 50 each)", min_value=0, step=1, value=0)
         reg_fee = st.number_input("Registration Fee (RM 100)", min_value=0, step=1, value=0)
         annual_fee = st.number_input("Annual Fee (RM 300)", min_value=0, step=1, value=0)
 
