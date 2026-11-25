@@ -334,7 +334,7 @@ if option == "Invoice Generator":
         if name.strip() == "":
             st.error("Please enter a name before generating the invoice.")
         else:
-            generate_invoice(name, payment_due_date.strftime("%d/%m/%Y"), package_basic_qty, package_advance_qty, package_full_day_qty, transit_basic_qty, transit_plus_qty, daily_transit_qty, ext30M_qty, ext1H_qty, extraclass_qty, earlymorning_qty, uniform_qty, sport_qty, reg_fee, annual_fee)
+            generate_invoice(name, payment_due_date.strftime("%d/%m/%Y"), package_basic_qty, package_advance_qty, package_full_day_qty, transit_basic_qty, transit_plus_qty, daily_transit_qty, ext30M_qty, ext1H_qty, extraclass_qty, earlymorning_qty, uniform_qty, sport_qty, grad_qty, reg_fee, annual_fee)
             with open("invoice.pdf", "rb") as file:
                 st.download_button("Download Invoice", file, file_name="invoice.pdf")
 
@@ -379,7 +379,7 @@ elif option == "Receipt Generator":
         if name.strip() == "":
             st.error("Please enter a name before generating the receipt.")
         else:
-            generate_receipt(name, package_basic_qty, package_advance_qty, package_full_day_qty, transit_basic_qty, transit_plus_qty, daily_transit_qty, ext30M_qty, ext1H_qty, extraclass_qty, earlymorning_qty, uniform_qty, sport_qty, reg_fee, annual_fee)
+            generate_receipt(name, package_basic_qty, package_advance_qty, package_full_day_qty, transit_basic_qty, transit_plus_qty, daily_transit_qty, ext30M_qty, ext1H_qty, extraclass_qty, earlymorning_qty, uniform_qty, sport_qty, grad_qty, reg_fee, annual_fee)
             with open("receipt.pdf", "rb") as file:
                 st.download_button("Download Receipt", file, file_name="receipt.pdf")
 
